@@ -2,15 +2,16 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Sun, Moon, Menu, X, User, Search } from 'lucide-react'
+import { Sun, Moon, Menu, X, Search } from 'lucide-react'
+// import User from 'lucide-react'
 import { useTheme } from '@/components/providers/ThemeProvider'
-import { useAuthStore } from '@/store/useAuthStore'
+// import { useAuthStore } from '@/store/useAuthStore'
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const { theme, toggleTheme } = useTheme() ?? {}
-  const { user, isAuthenticated } = useAuthStore()
+  // const { user, isAuthenticated } = useAuthStore()
 
   useEffect(() => {
     setMounted(true)
@@ -84,7 +85,7 @@ export function Header() {
               <Search className={`h-5 w-5 ${getTextPrimary()}`} />
             </button>
 
-            {isAuthenticated ? (
+            {/* {isAuthenticated ? (
               <div className="flex items-center space-x-4">
                 <Link href="/dashboard">
                   <button className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
@@ -111,7 +112,7 @@ export function Header() {
                   </button>
                 </Link>
               </div>
-            )}
+            )} */}
           </div>
 
           {/* Mobile menu button */}
@@ -161,7 +162,7 @@ export function Header() {
             ))}
 
             <div className="pt-4 space-y-2">
-              {isAuthenticated ? (
+              {/* {isAuthenticated ? (
                 <>
                   <Link href="/dashboard">
                     <button className="w-full flex items-center justify-start space-x-2 p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
@@ -188,7 +189,7 @@ export function Header() {
                     </button>
                   </Link>
                 </>
-              )}
+              )} */}
             </div>
           </div>
         )}

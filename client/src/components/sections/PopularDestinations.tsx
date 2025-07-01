@@ -17,7 +17,7 @@ export function PopularDestinations() {
             Popular <span className="gradient-text">Destinations</span>
           </h2>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Explore our collection of exclusive properties in the world's most sought-after locations
+            Explore our collection of exclusive properties in the world&apos;s most sought-after locations
           </p>
         </div>
         

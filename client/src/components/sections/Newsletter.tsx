@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { useTheme } from '@/components/providers/ThemeProvider'
+import Image from 'next/image'
 
 export function Newsletter() {
   const [email, setEmail] = useState('')
@@ -66,9 +67,13 @@ export function Newsletter() {
                     : 'linear-gradient(135deg, rgb(245 208 254) 0%, rgb(253 230 138) 100%)'
                 }}
               >
-                <div className="ziggla-text-primary font-medium">
-                  <img src="london.jpg" alt="Newsletter" className="w-150 h-50 object-cover" />
-                </div>
+                <Image
+                  src="/london.jpg"
+                  alt="Newsletter"
+                  width={300}
+                  height={160}
+                  className="w-72 h-40 object-cover rounded-lg"
+                />
               </div>
             </div>
           </div>

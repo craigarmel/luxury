@@ -1,4 +1,5 @@
 import { Check, Plus, Shield } from 'lucide-react'
+import Image from 'next/image'
 
 const features = [
   {
@@ -53,9 +54,13 @@ export function ZigglaExperience() {
           <div className="relative h-96 rounded-xl overflow-hidden">
             {/* Placeholder pour l'image d'expérience */}
             <div className="w-full h-full bg-gradient-to-br from-primary-100 to-gold-100 dark:from-primary-900 dark:to-gold-900 flex items-center justify-center">
-              <div className="text-primary-400 dark:text-primary-300 text-lg font-medium">
-                <img src="lounge.jpg" alt="Luxury Experience" />
-              </div>
+              <Image
+                src="/lounge.jpg"
+                alt="Luxury Experience"
+                className="rounded-lg"
+                fill
+                style={{ objectFit: 'cover' }}
+              />
             </div>
           </div>
         </div>

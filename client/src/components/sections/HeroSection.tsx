@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
-import { Search, MapPin, Calendar, Users } from 'lucide-react'
-import { Button } from '@/components/ui/Button'
+// import { useState } from 'react'
+// import { Search, MapPin, Calendar, Users } from 'lucide-react'
+// import { Button } from '@/components/ui/Button'
 import { SearchForm } from '@/components/forms/SearchForm'
+import Image from 'next/image'
 
 export function HeroSection() {
   return (
@@ -12,10 +13,12 @@ export function HeroSection() {
       <div className="w-full h-[600px] bg-cover bg-center relative bg-gray-800">
         {/* Placeholder pour l'image */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60 flex items-center justify-center">
-          <img 
+          <Image 
             src="/hero-bg.jpg"
             alt="Luxury Properties Background" 
-            className="w-full h-full object-cover opacity-50"
+            fill
+            className="object-cover opacity-50"
+            priority
           />
         </div>
         
@@ -28,7 +31,7 @@ export function HeroSection() {
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-white mb-10 max-w-3xl animate-slide-up">
-            Discover handpicked exclusive properties in the world's most coveted destinations
+            Discover handpicked exclusive properties in the world&apos;s most coveted destinations
           </p>
           
           {/* Search Box */}
