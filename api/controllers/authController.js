@@ -35,6 +35,7 @@ const register = async (req, res, next) => {
       token,
       user: userProfile
     });
+    localStorage.setItem('status', JSON.stringify(res.status));
 
   } catch (error) {
     next(error);
@@ -105,8 +106,55 @@ const getMe = async (req, res, next) => {
   }
 };
 
+// @desc    Logout user
+// @route   POST /api/auth/logout
+// @access  Private
+const logout = async (req, res, next) => {
+    try {
+        // Invalidate the token by removing it from the client side
+        res.status(200).json({
+            success: true,
+            message: 'Logged out successfully'
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// @desc    Home route
+// @route   GET /api/auth/home
+// @access  Public
+const home = (req, res) => {
+    res.send(`
+    <h1>Welcome to the Luxury API</h1>
+    <h2>Register</h2>
+    <form method="POST" action="/api/auth/register">
+        <input name="username" placeholder="Username" required />
+        <input name="email" type="email" placeholder="Email" required />
+        <input name="password" type="password" placeholder="Password" required />
+        <button type="submit">Register</button>
+    </form>
+    <h2>Login</h2>
+    <form method="POST" action="/api/auth/login">
+        <input name="email" type="email" placeholder="Email" required />
+        <input name="password" type="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+    </form>
+    <h2>Get Me</h2>
+    <form method="GET" action="/api/auth/me">
+        <button type="submit">Get My Profile</button>
+    </form>
+    <h2>Logout</h2>
+    <form method="POST" action="/api/auth/logout">
+        <button type="submit">Logout</button>
+    </form>
+    `);
+};
+
 module.exports = {
   register,
   login,
-  getMe
+  getMe,
+  logout,
+  home
 };

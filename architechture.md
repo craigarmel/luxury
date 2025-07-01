@@ -170,26 +170,26 @@
 - `POST /api/auth/register` - Inscription (locataire/propriétaire)
 - `POST /api/auth/login` - Connexion utilisateur
 - `POST /api/auth/logout` - Déconnexion
+<!-- - `POST /api/auth/google` - Connexion Google OAuth
 - `POST /api/auth/refresh` - Rafraîchir le token JWT
 - `POST /api/auth/forgot-password` - Mot de passe oublié
 - `POST /api/auth/reset-password` - Réinitialiser mot de passe
 - `GET /api/auth/verify-email/:token` - Vérification email
-- `POST /api/auth/google` - Connexion Google OAuth
 - `POST /api/auth/two-factor/enable` - Activer 2FA
-- `POST /api/auth/two-factor/verify` - Vérifier code 2FA
+- `POST /api/auth/two-factor/verify` - Vérifier code 2FA -->
 
 ### 2. **Service Utilisateurs** (`/api/users`)
 - `GET /api/users/profile` - Profil utilisateur connecté
 - `PUT /api/users/profile` - Modifier profil
+- `GET /api/users/dashboard` - Tableau de bord personnel
 - `POST /api/users/avatar` - Upload photo de profil (Cloud Storage)
-- `PUT /api/users/change-password` - Changer mot de passe
+<!-- - `PUT /api/users/change-password` - Changer mot de passe
 - `GET /api/users/identity-verification` - Statut vérification identité
 - `POST /api/users/identity-verification` - Soumettre documents (Cloud Vision)
 - `PUT /api/users/preferences` - Préférences utilisateur
-- `GET /api/users/dashboard` - Tableau de bord personnel
 - `GET /api/users/:id/public-profile` - Profil public utilisateur
 - `POST /api/users/report` - Signaler un utilisateur
-- `GET /api/users/verification-badges` - Badges de vérification
+- `GET /api/users/verification-badges` - Badges de vérification -->
 
 ### 3. **Service Propriétés** (`/api/properties`)
 - `GET /api/properties` - Rechercher propriétés (filtres + Maps API)
@@ -205,10 +205,10 @@
 - `PUT /api/properties/:id/status` - Activer/désactiver propriété
 - `GET /api/properties/my-properties` - Propriétés du propriétaire connecté
 - `GET /api/properties/:id/reviews` - Avis sur une propriété
-- `GET /api/properties/featured` - Propriétés mises en avant
-- `GET /api/properties/nearby` - Propriétés à proximité (Distance Matrix API)
 - `POST /api/properties/:id/duplicate` - Dupliquer propriété
 - `GET /api/properties/:id/analytics` - Statistiques propriété
+<!-- - `GET /api/properties/featured` - Propriétés mises en avant
+- `GET /api/properties/nearby` - Propriétés à proximité (Distance Matrix API) -->
 
 ### 4. **Service Réservations** (`/api/bookings`)
 - `GET /api/bookings` - Réservations de l'utilisateur
@@ -245,10 +245,10 @@
 - `DELETE /api/reviews/:id` - Supprimer son avis
 - `POST /api/reviews/:id/response` - Réponse propriétaire à un avis
 - `GET /api/reviews/user/:userId` - Avis reçus par un utilisateur
-- `POST /api/reviews/:id/report` - Signaler un avis inapproprié
+<!-- - `POST /api/reviews/:id/report` - Signaler un avis inapproprié
 - `POST /api/reviews/:id/helpful` - Marquer avis comme utile
 - `GET /api/reviews/sentiment-analysis` - Analyse sentiment (Natural Language API)
-- `GET /api/reviews/insights` - Insights avis pour propriétaire
+- `GET /api/reviews/insights` - Insights avis pour propriétaire -->
 
 ### 7. **Service Localisation** (`/api/locations`)
 - `GET /api/locations/cities` - Villes disponibles
@@ -256,27 +256,27 @@
 - `GET /api/locations/nearby` - Propriétés à proximité (Maps API)
 - `GET /api/locations/autocomplete` - Autocomplétion adresses (Places API)
 - `GET /api/locations/:id/points-of-interest` - Points d'intérêt (Places API)
-- `POST /api/locations/geocode` - Géocoder adresse (Geocoding API)
+<!-- - `POST /api/locations/geocode` - Géocoder adresse (Geocoding API)
 - `GET /api/locations/travel-time` - Temps de trajet (Distance Matrix API)
-- `GET /api/locations/elevation` - Données altitude (Elevation API)
+- `GET /api/locations/elevation` - Données altitude (Elevation API) -->
 
 ### 8. **Service Analytics** (`/api/analytics`)
 - `GET /api/analytics/host-dashboard` - Tableau de bord propriétaire
 - `GET /api/analytics/booking-stats` - Statistiques réservations
 - `GET /api/analytics/revenue` - Revenus propriétaire
 - `GET /api/analytics/occupancy` - Taux d'occupation
-- `GET /api/analytics/market-insights` - Insights marché local
+<!-- - `GET /api/analytics/market-insights` - Insights marché local
 - `GET /api/analytics/competitor-analysis` - Analyse concurrence
 - `GET /api/analytics/pricing-suggestions` - Suggestions prix
-- `GET /api/analytics/demand-forecast` - Prévision demande
+- `GET /api/analytics/demand-forecast` - Prévision demande -->
 
 ### 9. **Service Recherche** (`/api/search`)
 - `GET /api/search/properties` - Recherche propriétés avec filtres
 - `GET /api/search/suggestions` - Suggestions de recherche
-- `POST /api/search/saved-searches` - Sauvegarder recherche
-- `GET /api/search/saved-searches` - Récupérer recherches sauvées
 - `GET /api/search/trending` - Destinations tendance
-- `POST /api/search/alerts` - Alertes de prix
+- `POST /api/search/saved-searches` - Sauvegarder recherche
+<!-- - `GET /api/search/saved-searches` - Récupérer recherches sauvées
+- `POST /api/search/alerts` - Alertes de prix -->
 
 ---
 

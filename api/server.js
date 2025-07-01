@@ -20,11 +20,20 @@ const app = express();
 connectDB();
 
 app.get('/', (req, res) => {
+    //create html page with this message
+  res.send(`<h1>Welcome to the Ziggla API</h1>
+    <p>Available routes:</p>
+    <ul>
+      <li><a href="/api/auth">Auth</a></li>
+      <li><a href="/api/users">Users</a></li>
+      <li><a href="/api/properties">Properties</a></li>
+    </ul>`);
+
   res.status(200).json({
     success: true,
     message: 'Welcome to the Luxury API'
   });
-}); 
+});
 
 // Security middleware
 app.use(helmet());
