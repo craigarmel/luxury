@@ -39,14 +39,22 @@ app.get('/', (req, res) => {
 app.use(helmet());
 
 // Rate limiting
+// In your rate limiting setup
+const rateLimit = require('express-rate-limit');
+
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
-  message: 'Too many requests from this IP, please try again later.',
-  standardHeaders: true,
-  legacyHeaders: false,
+  trustProxy: true, // Add this
+  // Or use a custom key generator
+  keyGenerator: (req) => {
+    return req.ip || req.connection.remoteAddress;
+  }
 });
+
 app.use(limiter);
+
+app.set('trust proxy', true);
 
 // CORS configuration
 app.use(cors({
