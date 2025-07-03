@@ -3,7 +3,7 @@ import { useAuthStore } from '@/store/useAuthStore'
 
 interface UseApiOptions {
   immediate?: boolean
-  dependencies?: any[]
+  dependencies?: unknown[]
 }
 
 export function useApi<T>(

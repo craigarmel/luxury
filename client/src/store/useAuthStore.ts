@@ -148,7 +148,7 @@ export const useAuthStore = create<AuthState>()(
           
           const data = await response.json()
           set({ token: data.token })
-        } catch (error) {
+        } catch {
           get().logout()
         }
       },
