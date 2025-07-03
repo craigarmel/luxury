@@ -28,9 +28,9 @@ export function Header() {
   // Helper to get header classes based on theme
   const getHeaderClasses = () => {
     if (theme === 'light') {
-      return 'sticky top-0 z-50 bg-blue-50/80 backdrop-blur-md border-b ziggla-border'
+      return 'sticky top-0 z-50 backdrop-blur-md border-b ziggla-border'
     }
-    return 'sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b ziggla-border'
+    return 'sticky top-0 z-50 dark:bg-slate-900/80 backdrop-blur-md border-b ziggla-border'
   }
 
   // Helper to get text color based on theme

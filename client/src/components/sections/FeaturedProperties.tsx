@@ -36,10 +36,10 @@ const featuredProperties = [
 
 export function FeaturedProperties() {
   return (
-    <section className="py-16 px-6 bg-white dark:bg-dark-900">
+    <section className="py-16 px-6 ziggla-bg-secondary dark:bg-dark-900">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-12">
-          <h2 className="text-3xl font-serif font-bold text-gray-900 dark:text-white">
+          <h2 className="text-3xl font-serif font-bold ziggla-text-primary dark:text-white">
             Featured <span className="gradient-text">Properties</span>
           </h2>
           <Link 

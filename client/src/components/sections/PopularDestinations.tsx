@@ -10,13 +10,13 @@ const destinations = [
 
 export function PopularDestinations() {
   return (
-    <section className="py-16 px-6 bg-gray-50 dark:bg-dark-800">
+    <section className="py-16 px-6 ziggla-bg-secondary dark:bg-dark-800">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-serif font-bold mb-4 text-gray-900 dark:text-white">
+          <h2 className="text-3xl font-serif font-bold mb-4 text-gray-900 ziggla-text-primary">
             Popular <span className="gradient-text">Destinations</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="ziggla-text-primary max-w-2xl mx-auto">
             Explore our collection of exclusive properties in the world&apos;s most sought-after locations
           </p>
         </div>

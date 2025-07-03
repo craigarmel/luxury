@@ -27,18 +27,14 @@ export function SearchForm() {
 
     return (
         <div
-            className={`bg-white rounded-lg p-6 shadow-2xl w-full max-w-4xl mx-auto animate-slide-up ${
-                theme === 'dark' ? 'dark:bg-dark-800' : ''
-            }`}
+            className={`bg-white rounded-lg p-6 shadow-2xl w-full max-w-4xl mx-auto animate-slide-up ziggla-bg-secondary`}
         >
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 {/* Destination */}
                 <div className="space-y-2">
                     <label
                         htmlFor="destination"
-                        className={`block text-sm font-medium ${
-                            theme === 'dark' ? 'text-black' : 'text-gray-700'
-                        }`}
+                        className={`block text-sm font-medium ziggla-text-primary`}
                     >
                         <MapPin className="inline w-4 h-4 mr-1" />
                         Destination
@@ -56,9 +52,7 @@ export function SearchForm() {
                 <div className="space-y-2">
                     <label
                         htmlFor="check-in"
-                        className={`block text-sm font-medium ${
-                            theme === 'dark' ? 'text-black' : 'text-gray-700'
-                        }`}
+                        className={`block text-sm font-medium ziggla-text-primary`}
                     >
                         <Calendar className="inline w-4 h-4 mr-1" />
                         Check In
@@ -75,9 +69,7 @@ export function SearchForm() {
                 <div className="space-y-2">
                     <label
                         htmlFor="check-out"
-                        className={`block text-sm font-medium ${
-                            theme === 'dark' ? 'text-black' : 'text-gray-700'
-                        }`}
+                        className={`block text-sm font-medium ziggla-text-primary`}
                     >
                         <Calendar className="inline w-4 h-4 mr-1" />
                         Check Out
@@ -94,9 +86,7 @@ export function SearchForm() {
                 <div className="space-y-2">
                     <label
                         htmlFor="guests"
-                        className={`block text-sm font-medium ${
-                            theme === 'dark' ? 'text-black' : 'text-gray-700'
-                        }`}
+                        className={`block text-sm font-medium ziggla-text-primary`}
                     >
                         <Users className="inline w-4 h-4 mr-1" />
                         Guests
