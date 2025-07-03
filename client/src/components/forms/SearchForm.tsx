@@ -4,12 +4,8 @@ import { useState } from 'react'
 import { Search, MapPin, Calendar, Users } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
-import { useTheme } from '@/components/providers/ThemeProvider'
 
 export function SearchForm() {
-    const themeContext = useTheme()
-    const theme = themeContext?.theme ?? 'light'
-
     const [searchData, setSearchData] = useState({
         destination: '',
         checkIn: '',
