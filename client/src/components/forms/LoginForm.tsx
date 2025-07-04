@@ -15,7 +15,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
     const { login, clearError } = useAuthStore();
-    const { loading: isLoading, data, error } = useApi( apiCall => login(formData.email, formData.password), {
+    const { loading: isLoading, error } = useApi(() => login(formData.email, formData.password), {
         immediate: false,
         dependencies: [formData.email, formData.password],
     });

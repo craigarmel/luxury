@@ -62,7 +62,7 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
-  const { register, isLoading, error, clearError } = useAuthStore();
+  const { register, isLoading, clearError, error } = useAuthStore();
 
   const validateForm = () => {
     const errors: Record<string, string> = {};

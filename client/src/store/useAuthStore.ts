@@ -60,10 +60,16 @@ export const useAuthStore = create<AuthState>()(
             isLoading: false,
             error: null,
           })
-        } catch (error: any) {
+        } catch (error: unknown) {
+          let errorMessage = 'Login failed'
+          if (axios.isAxiosError(error)) {
+            errorMessage = error.response?.data?.message || error.message || errorMessage
+          } else if (error instanceof Error) {
+            errorMessage = error.message
+          }
           set({ 
             isLoading: false,
-            error: error.response?.data?.message || error.message || 'Login failed'
+            error: errorMessage
           })
           throw error
         }
@@ -81,10 +87,16 @@ export const useAuthStore = create<AuthState>()(
             isLoading: false,
             error: null,
           })
-        } catch (error: any) {
+        } catch (error: unknown) {
+          let errorMessage = 'Registration failed'
+          if (axios.isAxiosError(error)) {
+            errorMessage = error.response?.data?.message || error.message || errorMessage
+          } else if (error instanceof Error) {
+            errorMessage = error.message
+          }
           set({ 
             isLoading: false,
-            error: error.response?.data?.message || error.message || 'Registration failed'
+            error: errorMessage
           })
           throw error
         }
