@@ -87,6 +87,7 @@ export const useAuthStore = create<AuthState>()(
             isLoading: false,
             error: null,
           })
+          //TEST
         } catch (error: unknown) {
           let errorMessage = 'Registration failed'
           if (axios.isAxiosError(error)) {
