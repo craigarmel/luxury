@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 const register = async (req, res, next) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, role } = req.body;
 
     // Check if user exists
     const existingUser = await User.findOne({ email });
@@ -23,7 +23,8 @@ const register = async (req, res, next) => {
       firstName,
       lastName,
       email,
-      password
+      password,
+      role: role
     });
 
     const token = user.getSignedJwtToken();
@@ -35,7 +36,6 @@ const register = async (req, res, next) => {
       token,
       user: userProfile
     });
-    localStorage.setItem('status', JSON.stringify(res.status));
 
   } catch (error) {
     next(error);

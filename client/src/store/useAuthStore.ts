@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import axios from 'axios'
 
 interface User {
   id: string
@@ -50,19 +51,8 @@ export const useAuthStore = create<AuthState>()(
       login: async (email: string, password: string) => {
         set({ isLoading: true, error: null })
         try {
-          const response = await fetch(`${API_BASE_URL}/auth/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-          })
-          
-          if (!response.ok) {
-            const errorData = await response.json()
-            throw new Error(errorData.message || 'Login failed')
-          }
-          
-          const data = await response.json()
-          
+          const response = await axios.post(`${API_BASE_URL}/auth/login`, { email, password })
+          const data = response.data
           set({
             user: data.user,
             token: data.token,
@@ -70,10 +60,10 @@ export const useAuthStore = create<AuthState>()(
             isLoading: false,
             error: null,
           })
-        } catch (error) {
+        } catch (error: any) {
           set({ 
             isLoading: false,
-            error: error instanceof Error ? error.message : 'Login failed'
+            error: error.response?.data?.message || error.message || 'Login failed'
           })
           throw error
         }
@@ -82,19 +72,8 @@ export const useAuthStore = create<AuthState>()(
       register: async (userData: RegisterData) => {
         set({ isLoading: true, error: null })
         try {
-          const response = await fetch(`${API_BASE_URL}/auth/register`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(userData),
-          })
-          
-          if (!response.ok) {
-            const errorData = await response.json()
-            throw new Error(errorData.message || 'Registration failed')
-          }
-          
-          const data = await response.json()
-          
+          const response = await axios.post(`${API_BASE_URL}/auth/register`, userData)
+          const data = response.data
           set({
             user: data.user,
             token: data.token,
@@ -102,10 +81,10 @@ export const useAuthStore = create<AuthState>()(
             isLoading: false,
             error: null,
           })
-        } catch (error) {
+        } catch (error: any) {
           set({ 
             isLoading: false,
-            error: error instanceof Error ? error.message : 'Registration failed'
+            error: error.response?.data?.message || error.message || 'Registration failed'
           })
           throw error
         }
@@ -118,8 +97,6 @@ export const useAuthStore = create<AuthState>()(
           isAuthenticated: false,
           error: null,
         })
-        
-        // Clear any stored tokens
         localStorage.removeItem('auth-storage')
       },
 
@@ -132,21 +109,17 @@ export const useAuthStore = create<AuthState>()(
         if (!currentToken) return
 
         try {
-          const response = await fetch(`${API_BASE_URL}/auth/refresh`, {
-            method: 'POST',
-            headers: { 
-              'Authorization': `Bearer ${currentToken}`,
-              'Content-Type': 'application/json'
-                                                                                
-            },
-          })
-          
-          if (!response.ok) {
-            get().logout()
-            return
-          }
-          
-          const data = await response.json()
+          const response = await axios.post(
+            `${API_BASE_URL}/auth/refresh`,
+            {},
+            {
+              headers: {
+                'Authorization': `Bearer ${currentToken}`,
+                'Content-Type': 'application/json'
+              }
+            }
+          )
+          const data = response.data
           set({ token: data.token })
         } catch {
           get().logout()

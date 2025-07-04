@@ -20,7 +20,7 @@ const app = express();
 connectDB();
 
 app.get('/', (req, res) => {
-    //create html page with this message
+  // Send only the HTML response
   res.send(`<h1>Welcome to the Ziggla API</h1>
     <p>Available routes:</p>
     <ul>
@@ -28,11 +28,6 @@ app.get('/', (req, res) => {
       <li><a href="/api/users">Users</a></li>
       <li><a href="/api/properties">Properties</a></li>
     </ul>`);
-
-  res.status(200).json({
-    success: true,
-    message: 'Welcome to the Luxury API'
-  });
 });
 
 // Security middleware
@@ -54,11 +49,21 @@ app.set('trust proxy', true);
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: (origin, callback) => {
+    const allowedOrigins = [process.env.FRONTEND_URL, 'localhost:3000/auth/login'];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Handle preflight requests for all routes
+app.options('*', cors());
 
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));

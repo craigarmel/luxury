@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Sun, Moon, Menu, X, Search, User } from 'lucide-react'
 import { useTheme } from '@/components/providers/ThemeProvider'
 import { useAuthStore } from '@/store/useAuthStore'
+import { Button } from '../ui/Button'
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -85,31 +86,60 @@ export function Header() {
             </button>
 
             {isAuthenticated ? (
+              user?.role === 'host' ? (
               <div className="flex items-center space-x-4">
                 <Link href="/dashboard">
-                  <button className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                    <User className="h-5 w-5" />
-                    <span className={getTextPrimary()}>{user?.firstName}</span>
-                  </button>
+                <button className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                  <User className="h-5 w-5" />
+                  <span className={getTextPrimary()}>{user?.firstName}</span>
+                </button>
                 </Link>
                 <Link href="/properties/create">
-                  <button className="ziggla-button-outline">
-                    List Property
-                  </button>
+                <button className="ziggla-button-ghost">
+                  List Property
+                </button>
                 </Link>
+                <Button className="ziggla-button-ghost" onClick={() => useAuthStore.getState().logout()}>
+                Logout
+                </Button>
               </div>
+              ) : user?.role === 'admin' ? (
+              <div className="flex items-center space-x-4">
+                <Link href="/admin">
+                <button className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                  <User className="h-5 w-5" />
+                  <span className={getTextPrimary()}>{user?.firstName} (Admin)</span>
+                </button>
+                </Link>
+                <Button className="ziggla-button-ghost" onClick={() => useAuthStore.getState().logout()}>
+                Logout
+                </Button>
+              </div>
+              ) : (
+              <div className="flex items-center space-x-4">
+                <Link href="/dashboard">
+                <button className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                  <User className="h-5 w-5" />
+                  <span className={getTextPrimary()}>{user?.firstName}</span>
+                </button>
+                </Link>
+                <Button className="ziggla-button-ghost" onClick={() => useAuthStore.getState().logout()}>
+                Logout
+                </Button>
+              </div>
+              )
             ) : (
               <div className="flex items-center space-x-2">
-                <Link href="/auth/login">
-                  <button className={`px-4 py-2 ${getTextPrimary()} hover:bg-slate-50 dark:hover:bg-slate-50 rounded-lg transition-colors`}>
-                    Sign In
-                  </button>
-                </Link>
-                <Link href="/auth/register">
-                  <button className="ziggla-button-primary">
-                    Sign Up
-                  </button>
-                </Link>
+              <Link href="/auth/login">
+                <button className={`px-4 py-2 ${getTextPrimary()} hover:bg-slate-50 dark:hover:bg-slate-50 rounded-lg transition-colors`}>
+                Sign In
+                </button>
+              </Link>
+              <Link href="/auth/register">
+                <button className="ziggla-button-primary">
+                Sign Up
+                </button>
+              </Link>
               </div>
             )}
           </div>
@@ -162,23 +192,52 @@ export function Header() {
 
             <div className="pt-4 space-y-2">
               {isAuthenticated ? (
-                <>
-                  <Link href="/dashboard">
-                    <button className="w-full flex items-center justify-start space-x-2 p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                      <User className="h-5 w-5" />
-                      <span>Dashboard</span>
-                    </button>
-                  </Link>
-                  <Link href="/properties/create">
-                    <button className="w-full ziggla-button-outline">
-                      List Property
-                    </button>
-                  </Link>
-                </>
+                user?.role === 'host' ? (
+                  <>
+                    <Link href="/dashboard">
+                      <button className="w-full flex items-center justify-start space-x-2 p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                        <User className="h-5 w-5" />
+                        <span>{user?.firstName}</span>
+                      </button>
+                    </Link>
+                    <Link href="/properties/create">
+                      <button className="w-full ziggla-button-ghost">
+                        List Property
+                      </button>
+                    </Link>
+                    <Button className="w-full ziggla-button-ghost" onClick={() => useAuthStore.getState().logout()}>
+                      Logout
+                    </Button>
+                  </>
+                ) : user?.role === 'admin' ? (
+                  <>
+                    <Link href="/admin">
+                      <button className="w-full flex items-center justify-start space-x-2 p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                        <User className="h-5 w-5" />
+                        <span>{user?.firstName} (Admin)</span>
+                      </button>
+                    </Link>
+                    <Button className="w-full ziggla-button-ghost" onClick={() => useAuthStore.getState().logout()}>
+                      Logout
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Link href="/dashboard">
+                      <button className="w-full flex items-center justify-start space-x-2 p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                        <User className="h-5 w-5" />
+                        <span>{user?.firstName}</span>
+                      </button>
+                    </Link>
+                    <Button className="w-full ziggla-button-ghost" onClick={() => useAuthStore.getState().logout()}>
+                      Logout
+                    </Button>
+                  </>
+                )
               ) : (
                 <>
                   <Link href="/auth/login">
-                    <button className="w-full ziggla-button-outline">
+                    <button className="w-full ziggla-button-ghost">
                       Sign In
                     </button>
                   </Link>
