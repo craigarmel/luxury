@@ -118,7 +118,7 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
       });
       onSuccess?.();
     } catch (error) {
-      // Error is handled by the store
+      console.error('Registration failed:', error);
     }
   };
 

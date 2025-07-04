@@ -133,7 +133,8 @@ export const useAuthStore = create<AuthState>()(
           )
           const data = response.data
           set({ token: data.token })
-        } catch {
+        } catch (error) {
+            console.error('Failed to refresh token:', error);
           get().logout()
         }
       },
