@@ -3,20 +3,11 @@ import ProfileHeader from "@/components/sections/profile/ProfileHeader";
 import ProfileStats from "@/components/sections/profile/ProfileStats";
 import ProfileTabs from "@/components/sections/profile/ProfileTabs";
 
-import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
-interface DashboardPageProps {
-  params: { userId: string }
-}
-
-export default function DashboardPage({ params }: DashboardPageProps) {
-    const [userId, setUserId] = useState<string>("");
-
-    useEffect(() => {
-        if (params && params.userId) {
-            setUserId(params.userId);
-        }
-    }, [params]);
+export default function DashboardPage() {
+    const params = useParams();
+    const userId = params?.userId as string;
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-8">
@@ -25,4 +16,4 @@ export default function DashboardPage({ params }: DashboardPageProps) {
             <ProfileTabs />
         </div>
     );
-};
+}

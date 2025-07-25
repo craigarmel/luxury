@@ -1,7 +1,7 @@
-import UpcomingTripCard from "@/components/bookings/UpcomingTripCard.tsx";
 import React from "react";
-
-const upcomingTrips = [
+import Image from "next/image";
+import { Button } from "@/components/ui/Button";
+const Trips = [
     {
         title: "Caldera View Penthouse",
         location: "Santorini, Greece",
@@ -22,15 +22,34 @@ const upcomingTrips = [
     },
 ];
 
-const UpcomingTrips: React.FC = () => (
+const TripCard: React.FC = () => (
     <div className="mb-12">
         <h2 className="text-2xl font-serif font-bold mb-6 dark:text-white">Upcoming Trips</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {upcomingTrips.map((trip, idx) => (
-                <UpcomingTripCard countdown={""} key={idx} {...trip} />
+            {Trips.map((trip, idx) => (
+                <div key={idx} className="bg-white dark:bg-dark-800 rounded-lg shadow-md p-6">
+                    <div className="relative mb-4">
+                        <Image
+                            src={`/images/trips/${trip.imageAlt.toLowerCase().replace(/ /g, "-")}.jpg`}
+                            alt={trip.imageAlt}
+                            className="w-full h-48 object-cover rounded-lg"
+                        />
+                        <span className="absolute top-2 left-2 bg-primary-600 text-white px-3 py-1 rounded-full text-sm">
+                            {trip.badge}
+                        </span>
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">{trip.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{trip.location}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-300 mt-1">
+                        {trip.checkIn} - {trip.checkOut} • {trip.guests}
+                    </p>
+                    <Button className="mt-4 px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700 transition-colors">
+                        View Details
+                    </Button>
+                </div>
             ))}
         </div>
     </div>
 );
 
-export default UpcomingTrips;
+export default TripCard;
