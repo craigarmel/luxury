@@ -1,4 +1,4 @@
-const Property = require('../models/property');
+const Property = require('../models/Property');
 
 // GET /api/properties - Search properties (filters + Maps API)
 exports.getAllProperties = async (req, res) => {
