@@ -207,8 +207,8 @@
 - `GET /api/properties/:id/reviews` - Avis sur une propriété
 - `POST /api/properties/:id/duplicate` - Dupliquer propriété
 - `GET /api/properties/:id/analytics` - Statistiques propriété
-<!-- - `GET /api/properties/featured` - Propriétés mises en avant
-- `GET /api/properties/nearby` - Propriétés à proximité (Distance Matrix API) -->
+- `GET /api/properties/featured` - Propriétés mises en avant
+- `GET /api/properties/nearby` - Propriétés à proximité (Distance Matrix API)
 
 ### 4. **Service Réservations** (`/api/bookings`)
 - `GET /api/bookings` - Réservations de l'utilisateur

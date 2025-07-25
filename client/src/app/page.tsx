@@ -1,9 +1,9 @@
-import { HeroSection } from '@/components/sections/HeroSection'
-import { FeaturedProperties } from '@/components/sections/FeaturedProperties'
-import { PopularDestinations } from '@/components/sections/PopularDestinations'
-import { ZigglaExperience } from '@/components/sections/ZigglaExperience'
-import { Testimonials } from '@/components/sections/Testimonials'
-import { Newsletter } from '@/components/sections/Newsletter'
+import { HeroSection } from '@/components/sections/home/HeroSection'
+import { FeaturedProperties } from '@/components/sections/home/FeaturedProperties'
+import { PopularDestinations } from '@/components/sections/home/PopularDestinations'
+import { ZigglaExperience } from '@/components/sections/home/ZigglaExperience'
+import { Testimonials } from '@/components/sections/home/Testimonials'
+import { Newsletter } from '@/components/sections/home/Newsletter'
 
 export default function HomePage() {
   return (

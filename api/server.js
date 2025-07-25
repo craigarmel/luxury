@@ -11,8 +11,8 @@ const errorHandler = require('./middleware/errorHandler');
 
 // Import routes
 const authRoutes = require('./routes/auth');
-//const userRoutes = require('./routes/users');
-//const propertyRoutes = require('./routes/properties');
+const userRoutes = require('./routes/users');
+const propertyRoutes = require('./routes/properties');
 
 const app = express();
 
@@ -49,23 +49,14 @@ app.set('trust proxy', true);
 
 // CORS configuration
 app.use(cors({
-  origin: (origin, callback) => {
-    const allowedOrigins = [process.env.FRONTEND_URL, 'localhost:3000/auth/login'];
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: [process.env.FRONTEND_URL, process.env.NEXT_PUBLIC_FRONTEND_URL],
+  credentials: true
 }));
 
 // Handle preflight requests for all routes
 app.options('*', cors());
 
-// Body parsing middleware
+// Body parsing middlewares
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
@@ -87,8 +78,8 @@ app.get('/health', (req, res) => {
 
 // API routes
 app.use('/api/auth', authRoutes);
-//app.use('/api/users', userRoutes);
-//app.use('/api/properties', propertyRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/properties', propertyRoutes);
 
 // 404 handler
 app.use('*', (req, res) => {

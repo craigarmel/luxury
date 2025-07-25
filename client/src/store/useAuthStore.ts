@@ -1,8 +1,10 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import axios from 'axios'
+// import router from 'next/dist/shared/lib/router/router'
 
 interface User {
+  token: string
   id: string
   email: string
   firstName: string
@@ -60,6 +62,9 @@ export const useAuthStore = create<AuthState>()(
             isLoading: false,
             error: null,
           })
+          if (typeof window !== 'undefined') {
+            window.location.href = '/'
+          }
         } catch (error: unknown) {
           let errorMessage = 'Login failed'
           if (axios.isAxiosError(error)) {
@@ -87,7 +92,9 @@ export const useAuthStore = create<AuthState>()(
             isLoading: false,
             error: null,
           })
-          //TEST
+          if (typeof window !== 'undefined') {
+            window.location.href = '/'
+          }
         } catch (error: unknown) {
           let errorMessage = 'Registration failed'
           if (axios.isAxiosError(error)) {

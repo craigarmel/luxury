@@ -4,28 +4,17 @@ import Link from 'next/link'
 import { Star } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { formatPrice } from '@/lib/utils'
-import { useTheme } from '@/components/providers/ThemeProvider' // Assuming @/components/providers/ThemeProvider is used
+import { useTheme } from '@/components/providers/ThemeProvider'
+import Image from 'next/image'
+import type { Property } from '@/types/Property'
 
-interface PropertyCardProps {
-  property: {
-    id: string
-    title: string
-    location: string
-    price: number
-    rating: number
-    image: string
-    description: string
-    badge?: {
-      text: string
-      type: 'white' | 'gold'
-    }
-  }
+type PropertyCardProps = {
+  property: Property
 }
 
 export function PropertyCard({ property }: PropertyCardProps) {
   const themeContext = useTheme()
   const theme = themeContext?.theme ?? 'light'
-
   const isDark = theme === 'dark'
 
   return (
@@ -44,27 +33,36 @@ export function PropertyCard({ property }: PropertyCardProps) {
                 : 'bg-white text-gray-900'
               : 'bg-gradient-to-r from-primary-500 to-gold-500 text-white'
           }`}>
-            {property.badge.text}
+            {property.badge.type === 'white' ? property.badge.text : 'Featured'}
           </div>
         )}
-        
-        {/* Placeholder image */}
-        <div className={`w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-700 ${
-          isDark ? 'bg-dark-600' : 'bg-gray-200'
-        }`}>
-          <div className={`text-sm font-medium ${isDark ? 'text-dark-400' : 'text-gray-400'}`}>
-            {property.title}
+        {property.images ? (
+          <Image
+            src={property?.images?.[0]?.url ?? ""}
+            alt={property.title}
+            fill
+            className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"
+            sizes="(max-width: 768px) 100vw, 33vw"
+            priority
+          />
+        ) : (
+          <div className={`w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-700 ${
+            isDark ? 'bg-dark-600' : 'bg-gray-200'
+          }`}>
+            <div className={`text-sm font-medium ${isDark ? 'text-dark-400' : 'text-gray-400'}`}>
+              {property.title}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       
       {/* Content */}
       <div className="p-6">
         <div className="flex justify-between items-center mb-2">
-          <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{property.location}</p>
+          <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{property?.location?.address ?? ""}</p>
           <div className="flex items-center">
             <Star className="h-4 w-4 text-gold fill-current" />
-            <span className={`text-sm font-medium ml-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>{property.rating}</span>
+            <span className={`text-sm font-medium ml-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>{property.stats.rating.overall}</span>
           </div>
         </div>
         
@@ -82,11 +80,11 @@ export function PropertyCard({ property }: PropertyCardProps) {
         
         <div className="flex justify-between items-center">
           <p className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            <span className="gradient-text">{formatPrice(property.price)}</span>
+            <span className="gradient-text">{formatPrice(property.pricing.basePrice ?? 0)}</span>
             <span className={`text-sm font-normal ${isDark ? 'text-gray-400' : 'text-gray-500'}`}> / night</span>
           </p>
           
-          <Link href={`/properties/${property.id}`}>
+          <Link href={`/properties/${property._id}`}>
             <Button 
               variant="outline" 
               size="sm"

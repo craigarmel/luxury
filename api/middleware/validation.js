@@ -74,9 +74,32 @@ const validateProperty = [
   handleValidationErrors
 ];
 
+// Validation middleware
+const validateProfileUpdate = [
+  body('bio').optional().isLength({ max: 500 }).withMessage('Bio must not exceed 500 characters'),
+  body('phone').optional().isMobilePhone().withMessage('Invalid phone number'),
+  body('alternateEmail').optional().isEmail().withMessage('Invalid alternate email'),
+  body('dateOfBirth').optional().isISO8601().withMessage('Invalid date format'),
+  body('gender').optional().isIn(['male', 'female', 'other', 'prefer_not_to_say']).withMessage('Invalid gender'),
+  body('address.street').optional().isLength({ max: 100 }).withMessage('Street address too long'),
+  body('address.city').optional().isLength({ max: 50 }).withMessage('City name too long'),
+  body('address.state').optional().isLength({ max: 50 }).withMessage('State name too long'),
+  body('address.zipCode').optional().isLength({ max: 20 }).withMessage('ZIP code too long'),
+  body('address.country').optional().isLength({ max: 50 }).withMessage('Country name too long')
+];
+
+const validatePreferences = [
+  body('preferences.language').optional().isIn(['en', 'es', 'fr', 'de', 'it', 'pt']).withMessage('Invalid language'),
+  body('preferences.currency').optional().isIn(['USD', 'EUR', 'GBP', 'CAD', 'AUD']).withMessage('Invalid currency'),
+  body('preferences.notifications.email.bookings').optional().isBoolean().withMessage('Must be boolean'),
+  body('preferences.notifications.email.promotions').optional().isBoolean().withMessage('Must be boolean'),
+  body('preferences.privacy.profileVisibility').optional().isIn(['public', 'hosts_only', 'private']).withMessage('Invalid visibility setting')
+];
+
 module.exports = {
   validateRegister,
   validateLogin,
   validateProperty,
-  handleValidationErrors
+  validateProfileUpdate,
+  validatePreferences
 };
